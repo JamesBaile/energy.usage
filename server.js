@@ -9,8 +9,6 @@ var EnergyUsage = require('./models/energy-usage');
 var port = process.env.PORT || 3000;
 var mongoConnection = process.env.MONGO || 'mongodb://mongo:27017/energy-usage';
 
-console.log('Mongo connection string = ' + mongoConnection);
-
 mongoose.connect(mongoConnection);
 
 var app = express();

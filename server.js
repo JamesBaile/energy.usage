@@ -62,7 +62,7 @@ energyUsageRoute.get(function(req, res) {
     res.json(usage);
   });
 });
-
+// xxxx
 // Create a new route with the /beers/:beer_id prefix
 var usageRoute = router.route('/usage/:usage_id');
 

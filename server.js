@@ -54,8 +54,8 @@ consumptionRoute.get(
     // Use the Beer model to find all beer
     var d = new Date().now
     var range = {
-        $gte: ISODate(d.toISOString()),
-        $lt: ISODate(date_by_subtracting_days(d,1).toISOString())
+        $gte: d.toISOString(),
+        $lt: date_by_subtracting_days(d,1).toISOString()
     }
     EnergyUsage.find({date: range},function(err, values) {
       if (err)

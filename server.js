@@ -20,6 +20,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));;
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Create our Express router
 var router = express.Router();
 
@@ -52,7 +58,7 @@ energyUsageRoute.post(function(req, res) {
   });
 });
 
-// Create endpoint /api/beers for GET
+// Create endpoint /api/energy-usage for GET
 energyUsageRoute.get(function(req, res) {
   // Use the Beer model to find all beer
   EnergyUsage.find(function(err, usage) {
@@ -62,7 +68,7 @@ energyUsageRoute.get(function(req, res) {
     res.json(usage);
   });
 });
-// xxxx
+
 // Create a new route with the /beers/:beer_id prefix
 var usageRoute = router.route('/usage/:usage_id');
 

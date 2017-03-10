@@ -40,7 +40,7 @@ var consumptionRoute = router.route('/energy-consumption');
 consumptionRoute.get(
   function(req, res) {
     // Use the Beer model to find all beer
-    EnergyUsage.find({_id: ObjectId("58c23c43f26bf8000faa7d2d")},function(err, usage) {
+    EnergyUsage.find({_id: "58c23c43f26bf8000faa7d2d"},function(err, usage) {
       if (err)
         res.send(err);
 

@@ -35,6 +35,20 @@ router.get('/private/ping', function(req, res) {
 
 // -- New Code Below Here -- //
 
+var consumptionRoute = router.route('/energy-consumption');
+
+consumptionRoute.get(
+  function(req, res) {
+    // Use the Beer model to find all beer
+    EnergyUsage.find({_id: ObjectId("58c23c43f26bf8000faa7d2d")},function(err, usage) {
+      if (err)
+        res.send(err);
+
+      res.json(usage);
+    });
+  }
+);
+
 // Create a new route with the prefix /beers
 var energyUsageRoute = router.route('/energy-usage');
 

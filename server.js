@@ -37,14 +37,37 @@ router.get('/private/ping', function(req, res) {
 
 var consumptionRoute = router.route('/energy-consumption');
 
+function date_by_subtracting_days(date, days) {
+    return new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate() - days,
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+        date.getMilliseconds()
+    );
+}
+
 consumptionRoute.get(
   function(req, res) {
     // Use the Beer model to find all beer
-    EnergyUsage.find({_id: "58c23c43f26bf8000faa7d2d"},function(err, usage) {
+    var d = new Date().now
+    var range = {
+        $gte: ISODate(d.toISOString()),
+        $lt: ISODate(date_by_subtracting_days(d,1).toISOString())
+    }
+    EnergyUsage.find({date: range},function(err, values) {
       if (err)
         res.send(err);
 
-      res.json(usage);
+        var result = { consumption : 0};
+
+        values.forEach(function(element) {
+            result.consumption = result.consumption + element.consumption;
+        });
+
+      res.json(result);
     });
   }
 );

@@ -52,7 +52,7 @@ function date_by_subtracting_days(date, days) {
 consumptionRoute.get(
   function(req, res) {
     // Use the Beer model to find all beer
-    var d = new Date().now
+    var d = new Date();
     var range = {
         $gte: d.toISOString(),
         $lt: date_by_subtracting_days(d,1).toISOString()

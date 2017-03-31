@@ -18,7 +18,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-}));;
+}));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -72,8 +72,16 @@ consumptionRoute.get(
   }
 );
 
-// Create a new route with the prefix /beers
-var energyUsageRoute = router.route('/energy-usage');
+//privacy
+var privacyRoute = router.route('/privacy');
+
+privacyRoute.get(function(req, res) {
+      res.send('<html><body><p>We will use your Facebook email address to link accounts only.</p></body></html>');
+});
+
+
+
+var energyUsageRoute = router.route('/api/energy-usage');
 
 // Create endpoint /api/beers for POSTS
 energyUsageRoute.post(function(req, res) {
@@ -107,7 +115,7 @@ energyUsageRoute.get(function(req, res) {
 });
 
 // Create a new route with the /beers/:beer_id prefix
-var usageRoute = router.route('/usage/:usage_id');
+var usageRoute = router.route('/api/usage/:usage_id');
 
 usageRoute.get(function(req, res) {
   EnergyUsage.findById(req.params.usage_id, function(err, usage) {
@@ -150,7 +158,7 @@ usageRoute.delete(function(req, res) {
 });
 
 // Register all our routes with /api
-app.use('/api', router);
+app.use('/', router);
 
 app.listen(port);
 console.log('Running on http://localhost:' + port);

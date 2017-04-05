@@ -33,6 +33,11 @@ router.get('/private/ping', function(req, res) {
   res.json({ message: 'pong' });
 });
 
+router.get('/health', function(req, res) {
+  res.json({ serviceName: 'energy.usage', version: "1.0.0.1", isOk: true });
+});
+
+
 // -- New Code Below Here -- //
 
 var consumptionRoute = router.route('/energy-consumption');

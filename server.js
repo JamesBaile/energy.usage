@@ -12,6 +12,7 @@ var mongoConnection = process.env.MONGO || 'mongodb://mongo:27017/energy-usage';
 console.log(mongoConnection);
 
 mongoose.connect(mongoConnection);
+mongoose.Promise = global.Promise;
 
 var app = express();
 
@@ -167,3 +168,18 @@ app.use('/', router);
 
 app.listen(port);
 console.log('Running on http://localhost:' + port);
+
+if (process.env.NODE_ENV === 'dev') {
+  app.use((err, req, res, next) => {
+    res.status(err.status).send({
+      status: err.status,
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+});

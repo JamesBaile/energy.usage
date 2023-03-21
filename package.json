@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "express": "^4.13.3",
-    "mongoose": "4.8.5",
+    "mongoose": "4.13.21",
     "body-parser" : "1.16.1"
   }
 }
